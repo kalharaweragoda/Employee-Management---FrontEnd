@@ -16,6 +16,7 @@ export class ViewAllEmployeeeComponent {
 
   public employeeList: any;
 
+  
   constructor(private http: HttpClient) {
     this.loadEmployeeTable();
   }
@@ -69,7 +70,31 @@ export class ViewAllEmployeeeComponent {
         });
       }
     });
-
-    
   }
+
+  public seleccteedEmployee : any ={
+    "id": null,
+    "firstName": null,
+    "lastName": null,
+    "email": null,
+    "departmentId": null,
+    "roleId": null
+  };
+   
+
+  updateEmployee(employee: any){
+     
+    if(employee!=null){
+      this.seleccteedEmployee = employee;
+    }
+
+    console.log(employee);
+  }
+
+  saveUpdateEmployee(){
+    this.http.put("http://localhost:8090/emp-controller/update-employee",this.seleccteedEmployee).subscribe(res=>{
+      console.log("update!");
+    })
+  }
+
 }
